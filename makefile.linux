@@ -1,0 +1,26 @@
+#
+# Script to build "untab" from the C++ source code on Linux.
+#
+# * Run "make -f makefile.linux" from the command line to build.
+#
+# * Assumes G++ is installed and configured to be able to run
+#   from a shell prompt.
+#
+
+%.o : %.cpp; \
+    g++ -c -std=c++11 -o $@ $<
+
+#%.o : %.c; \
+#    g++ -c -o $@ $<
+
+all: untab
+
+untab:  untab.o ; \
+    g++ -o $@ untab.o
+
+untab.o:  untab.cpp
+
+clean: ; \
+    rm *.o ; \
+    rm untab ; \
+    rm *.bak

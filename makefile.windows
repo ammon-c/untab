@@ -1,0 +1,26 @@
+#
+# NMAKE script to build untab.exe from the C++ source code.
+# Assumes Microsoft C++ compiler and linker are accessible
+# from the command prompt.
+#
+
+.SUFFIXES: .cpp
+
+.cpp.obj:
+    cl -nologo -c -DWIN32 -W4 -WX -Zi -EHsc $<
+
+all:  untab.exe
+
+untab.exe:  untab.obj
+    link /NOLOGO /DEBUG /OUT:$@ $**
+
+untab.obj:  untab.cpp
+
+clean:
+    if exist *.exe del *.exe
+    if exist *.obj del *.obj
+    if exist *.ilk del *.ilk
+    if exist *.pdb del *.pdb
+    if exist *.bak del *.bak
+    if exist .vs rmdir /s /q .vs
+
